@@ -18,7 +18,7 @@ gulp.task('tags', function () {
     .pipe(generateTags('ute-tags.json', {
       delimiter: '\t'
     }))
-    .pipe(gulp.dest(config.app + '/resource/omniture'))
+    .pipe(gulp.dest('app/resource/tags'))
 
 });  
 ```
