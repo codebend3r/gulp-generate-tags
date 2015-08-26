@@ -1,8 +1,8 @@
 Gulp Generate Tags
 ====================
+![gulp-generate-tags build status](https://travis-ci.org/crivas/gulp-generate-tags.svg?branch=master)
 
 > Gulp plugin that will convert txt or csv files into a JSON project. Here is an example on how you set it up in Gulp.
-![gulp-generate-tags build status](https://travis-ci.org/crivas/gulp-generate-tags.svg?branch=master)
 
 ## Options
 
