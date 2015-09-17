@@ -4,6 +4,18 @@ Gulp Generate Tags
 
 > Gulp plugin that will convert txt or csv files into a JSON project. Here is an example on how you set it up in Gulp.
 
+```js
+var generateTags = require('gulp-generate-tags')
+
+gulp.task('tags', function () {
+
+  return gulp.src(['app/on-click.tsv', 'app/on-load.tsv'])
+    .pipe(generateTags('tags.json'))
+    .pipe(gulp.dest('app/tags'))
+
+});  
+```
+
 ## Options
 
 - delimiter - default is ',' (comma) to delimit
@@ -14,11 +26,11 @@ var generateTags = require('gulp-generate-tags')
 
 gulp.task('tags', function () {
 
-  return gulp.src(['app/resource/tags/on-click.txt', 'app/resource/tags/on-load.txt'])
-    .pipe(generateTags('ute-tags.json', {
+  return gulp.src(['app/on-click.txt', 'app/on-load.txt'])
+    .pipe(generateTags('tags.json', {
       delimiter: '\t'
     }))
-    .pipe(gulp.dest('app/resource/tags'))
+    .pipe(gulp.dest('app/tags'))
 
 });  
 ```
