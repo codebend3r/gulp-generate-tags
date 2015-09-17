@@ -11,15 +11,12 @@ var fs = require('fs'),
   path = require('path'),
   gutil = require('gulp-util'),
   _ = require('underscore-node'),
-  convertToObject = require('./lib/convertToObject'),
+  convert = require('./lib/convert'),
   File = gutil.File,
   Concat = require('concat-with-sourcemaps'),
   PluginError = gutil.PluginError;
 
 module.exports = function (file, options) {
-
-  console.log('file:', file);
-  console.log('options:', options);
 
   if (!file) {
     throw new PluginError('gulp-generate-tags', 'Missing file option for gulp-generate-tags');
@@ -51,17 +48,22 @@ module.exports = function (file, options) {
    */
   var bufferContents = function (file, enc, cb) {
 
+    console.log('bufferContents');
+
     if (file.isStream()) {
 
+      console.log('bufferContents - A');
       this.emit('error', new gutil.PluginError('gulp-generate-tags', 'Streams are not supported!'));
       cb();
 
     } else if (file.isNull()) {
 
+      console.log('bufferContents - B');
       cb(null, file); // Do nothing if no contents
 
     } else {
 
+      console.log('bufferContents - C');
       // set first file if not already set
       if (!firstFile) {
         firstFile = file;
@@ -93,6 +95,8 @@ module.exports = function (file, options) {
    */
   var endStream = function (cb) {
 
+    console.log('endStream');
+
     // no files passed in, no file goes out
     if (!firstFile || !concat) {
       cb();
@@ -114,7 +118,9 @@ module.exports = function (file, options) {
 
     }
 
-    var convertedCSV = convertToObject(bufferedContentObj);
+    console.log('endStream -- convertedCSV');
+
+    var convertedCSV = convert.convertToObject(bufferedContentObj);
 
     joinedFile.contents = new Buffer(convertedCSV, opt);
 

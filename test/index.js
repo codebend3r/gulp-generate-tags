@@ -8,6 +8,7 @@ var should = require('chai').should(),
   gutil = require('gulp-util'),
   _ = require('underscore-node'),
   fs = require('fs'),
+  test = require('./test-stream'),
   generateTags = require('../index');
 
 describe('generateTags', function () {
@@ -29,8 +30,20 @@ describe('generateTags', function () {
 
   it('should covert tsv to json object', function (cb) {
 
-    var stream = generateTags('tags.json');
+    //var stream = generateTags('tags.json');
 
+    console.log('assert.first', assert.first);
+
+    test('./test/fixtures/tags-click.tsv', './test/fixtures/tags-pageload.tsv')
+      .pipe(generateTags('tags.json'))
+      //.pipe(assert.length(1))
+      .pipe(through(function (d) {
+        //d.contents.toString().should.eql('wadap');
+        console.log('d -->', d.contents.toString());
+      }))
+      .pipe(assert.end(cb));
+
+      /*
     stream.on('data', function (file) {
 
       var changedFile = file.contents.toString('utf-8');
@@ -38,22 +51,26 @@ describe('generateTags', function () {
       var jsonFile = JSON.stringify(changedFile);
       //var jsonParsed = JSON.parse(jsonFile);
 
-      console.log('changedFile:', changedFile);
-      console.log('jsonFile', jsonFile);
+      //console.log('changedFile:', changedFile);
+      //console.log('jsonFile', jsonFile);
       //console.log('jsonParsed', jsonParsed);
 
-      cb();
+      //cb();
 
     });
 
-    stream.on('end', function (file) {
+    stream.on('done', function (file) {
 
       //var changedFile = file.contents.toString('utf-8');
-      console.log('end --> file:', file);
+      console.log('done --> file:', file);
+
+      //cb();
 
     });
 
-    stream.write(getFile('./test/fixtures/tags.tsv'));
+    stream.write(getFile('./test/fixtures/tags-click.tsv'));
+    stream.write(getFile('./test/fixtures/tags-pageload.tsv'));
+    */
 
   });
 
