@@ -1,6 +1,6 @@
 {
   "name": "gulp-generate-tags",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": "https://github.com/crivas/gulp-generate-tags",
   "description": "gulp plugin for converting CSV or text files into on JSON file containing omniture tags and parameters",
   "main": "index.js",
@@ -9,12 +9,12 @@
   "dependencies": {
     "through2": "^0.6.3",
     "gulp-util": "^3.0.6",
-    "underscore-node": "^0.1.2"
+    "underscore-node": "^0.1.2",
+    "concat-with-sourcemaps": "^1.0.2",
+    "stream-array": "^1.1.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
-    "concat-with-sourcemaps": "^1.0.2",
-    "mocha": "^2.2.5",
-    "stream-array": "^1.1.1"
+    "mocha": "^2.2.5"
   }
 }
